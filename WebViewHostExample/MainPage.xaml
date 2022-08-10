@@ -31,6 +31,7 @@
                 x:Name="MyWebView"
                 HeightRequest="128"
                 HorizontalOptions="Fill"
+                Source="{Binding Source}"
                 VerticalOptions="FillAndExpand"
                 WidthRequest="512"
                 />

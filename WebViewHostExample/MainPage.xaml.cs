@@ -1,17 +1,27 @@
-﻿namespace WebViewHostExample;
+﻿using WebViewHostExample.ViewModels;
+
+namespace WebViewHostExample;
 
 public partial class MainPage : ContentPage
 {
 	int count = 0;
+    MainPageViewModel vm;
 
 	public MainPage()
 	{
 		InitializeComponent();
 
-		MyWebView.Source = new HtmlWebViewSource() { Html = htmlSource };
+        vm = new MainPageViewModel();
+        MyWebView.BindingContext = vm;
 
         MyWebView.JavaScriptAction += MyWebView_JavaScriptAction;
 	}
+
+    protected override void OnParentSet()
+    {
+        base.OnParentSet();
+        vm.Source = new HtmlWebViewSource() { Html = htmlSource };
+    }
 
     private void MyWebView_JavaScriptAction(object sender, Controls.JavaScriptActionEventArgs e)
     {

@@ -36,8 +36,6 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
             webView.SetWebViewClient(new JavascriptWebViewClient($"javascript: {JavascriptFunction}"));
             webView.AddJavascriptInterface(jsBridgeHandler, "jsBridge");
 
-            VirtualView.SourceChanged += VirtualView_SourceChanged;
-
             return webView;
         }
 
@@ -49,6 +47,8 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
             {
                 LoadSource(VirtualView.Source, PlatformView);
             }
+
+            VirtualView.SourceChanged += VirtualView_SourceChanged;
         }
 
         protected override void DisconnectHandler(Android.Webkit.WebView platformView)

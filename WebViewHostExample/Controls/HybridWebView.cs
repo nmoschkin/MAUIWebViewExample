@@ -81,7 +81,12 @@ namespace WebViewHostExample.Controls
         private static void OnSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as HybridWebView;
-            view.SourceChanged?.Invoke(view, new SourceChangedEventArgs(newValue as WebViewSource));
+
+            bindable.Dispatcher.Dispatch(() =>
+            {
+                view.SourceChanged?.Invoke(view, new SourceChangedEventArgs(newValue as WebViewSource));
+
+            });
         }
 
         public void Cleanup()

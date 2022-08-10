@@ -21,7 +21,6 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
 
         public HybridWebViewHandler() : base(HybridWebViewMapper)
         {
-            VirtualView.SourceChanged += VirtualView_SourceChanged;
         }
 
         private void VirtualView_SourceChanged(object sender, SourceChangedEventArgs e)
@@ -54,6 +53,8 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
             {
                 LoadSource(VirtualView.Source, PlatformView);
             }
+
+            VirtualView.SourceChanged += VirtualView_SourceChanged;
         }
 
         protected override void DisconnectHandler(WKWebView platformView)
