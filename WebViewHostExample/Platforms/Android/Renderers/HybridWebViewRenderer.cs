@@ -20,15 +20,18 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
     {
         const string JavascriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";
         Context _context;
-        Android.Webkit.WebView ctrl;
+        Android.Webkit.WebView control;
 
         public Android.Webkit.WebView Control
         {
-            get => ctrl;
+            get => control;
             set
             {
-                ctrl = value;
-                base.AddView(value);
+                if (!(value is null) && !value.Equals(control))
+                {
+                    control = value;
+                    base.AddView(value);
+                }
             }
         }
 

@@ -15,10 +15,23 @@ using WebViewHostExample.Controls;
 
 namespace WebViewHostExample.Platforms.iOS.Renderers
 {
-    public class HybridWebViewRenderer : ViewRenderer<HybridWebView, WKWebView>, IWKScriptMessageHandler
+    public class HybridWebViewRenderer : VisualElementRenderer<HybridWebView>, IWKScriptMessageHandler
     {
         const string JavaScriptFunction = "function invokeCSharpAction(data){window.webkit.messageHandlers.invokeAction.postMessage(data);}";
         WKUserContentController userController;
+        private WKWebView control;
+        public WKWebView Control
+        {
+            get => control;
+            set
+            {
+                if (!(value is null) && !value.Equals(control))
+                {
+                    control = value;
+                    base.Add(value);
+                }
+            }
+        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<HybridWebView> e)
         {
@@ -33,7 +46,8 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
 
                 var config = new WKWebViewConfiguration { UserContentController = userController };
                 var webView = new WKWebView(Frame, config);
-                SetNativeControl(webView);
+            
+                Control = webView;
             }
             if (e.OldElement != null)
             {
