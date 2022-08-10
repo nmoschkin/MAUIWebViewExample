@@ -90,9 +90,9 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
     {
         readonly WeakReference<ViewHandler<IHybridWebView, WKWebView>> hybridWebViewRenderer;
 
-        internal JSBridge(ViewHandler<IHybridWebView, WKWebView> owner)
+        internal JSBridge(ViewHandler<IHybridWebView, WKWebView> hybridRenderer)
         {
-            hybridWebViewRenderer = new WeakReference<ViewHandler<IHybridWebView, WKWebView>>(owner);
+            hybridWebViewRenderer = new WeakReference<ViewHandler<IHybridWebView, WKWebView>>(hybridRenderer);
         }
 
         public void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
