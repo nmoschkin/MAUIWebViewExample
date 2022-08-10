@@ -1,51 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Android.Content;
-using Android.Graphics;
+﻿using Android.Graphics;
 using Android.Webkit;
-using Android.Widget;
 
 using Java.Interop;
 
-using Microsoft.Maui.Controls.Compatibility.Platform.Android;
-using Microsoft.Maui.Controls.Handlers.Compatibility;
-using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Handlers;
 
 using WebViewHostExample.Controls;
 
 namespace WebViewHostExample.Platforms.Droid.Renderers
 {
-    public partial class HybridWebViewHandler : ViewHandler<IHybridWebView, Android.Webkit.WebView>
+    public class HybridWebViewHandler : ViewHandler<IHybridWebView, Android.Webkit.WebView>
     {
-        const string JavascriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";        
-        
+        public static PropertyMapper<IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
+
+        const string JavascriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";
+
+        private JSBridge jsBridgeHandler;
+
         public HybridWebViewHandler() : base(HybridWebViewMapper)
         {
+        }
+
+        private void VirtualView_SourceChanged(object sender, SourceChangedEventArgs e)
+        {
+            LoadSource(e.Source, PlatformView);
         }
 
         protected override Android.Webkit.WebView CreatePlatformView()
         {
             var webView = new Android.Webkit.WebView(Context);
+            jsBridgeHandler = new JSBridge(this);
 
             webView.Settings.JavaScriptEnabled = true;
 
             webView.SetWebViewClient(new JavascriptWebViewClient($"javascript: {JavascriptFunction}"));
-            webView.AddJavascriptInterface(new JSBridge(this), "jsBridge");
+            webView.AddJavascriptInterface(jsBridgeHandler, "jsBridge");
 
-            LoadSource(VirtualView.Source, webView);
+            VirtualView.SourceChanged += VirtualView_SourceChanged;
 
             return webView;
         }
 
-        protected override void RemoveContainer()
+        protected override void ConnectHandler(Android.Webkit.WebView platformView)
         {
+            base.ConnectHandler(platformView);
+
+            if (VirtualView.Source != null)
+            {
+                LoadSource(VirtualView.Source, PlatformView);
+            }
+        }
+
+        protected override void DisconnectHandler(Android.Webkit.WebView platformView)
+        {
+            base.DisconnectHandler(platformView);
+
+            VirtualView.SourceChanged -= VirtualView_SourceChanged;
             VirtualView.Cleanup();
-            base.RemoveContainer();
+
+            jsBridgeHandler?.Dispose();
+            jsBridgeHandler = null;
         }
 
         private static void LoadSource(WebViewSource source, Android.Webkit.WebView control)
@@ -63,20 +77,6 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
             }
             catch { }
         }
-
-        public static PropertyMapper<IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper)
-        {
-            [nameof(IHybridWebView.Source)] = MapSource
-        };
-      
-        static void MapSource(HybridWebViewHandler handler, IHybridWebView entry)
-        {
-            var source = entry.Source;
-            var control = handler.PlatformView;
-
-            LoadSource(source, control);
-        }
-
     }
 
     public class JavascriptWebViewClient : WebViewClient
@@ -116,4 +116,5 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
             }
         }
     }
+
 }
