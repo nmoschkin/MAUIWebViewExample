@@ -20,10 +20,6 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
 
-#if ANDROID
-        AppCenter.Start("0c4de546-408d-4b4e-b037-49eab95fd874", typeof(Analytics), typeof(Crashes));
-#endif
-
         var builder = MauiApp.CreateBuilder();
 
         builder
