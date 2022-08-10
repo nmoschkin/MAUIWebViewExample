@@ -23,6 +23,12 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<ProvisioningType>automatic</ProvisioningType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+	  <CodesignKey>Apple Development: Nathaniel Moschkin (Z5JX9H58QG)</CodesignKey>
+	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -44,11 +50,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_MauiCompileToAdd Remove="Platforms\Android\Renderers\HybridWebViewRenderer.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Platforms\Android\Renderers\HybridWebViewRenderer.cs" />
+	  <None Include="Platforms\Android\Handlers\HybridWebViewHandler.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

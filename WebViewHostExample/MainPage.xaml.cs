@@ -33,8 +33,9 @@ public partial class MainPage : ContentPage
     }
 </script>
 
-<div style='display: flex; flex-direction: column; justify-content: center; width: 100%'>
-<button style='margin-left: 15px; margin-right: 15px; background: lightblue' id='hereBtn' onclick='javascript:buttonClicked(event)'>Click Me!</button>
+<div style='display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%'>
+<h2 style='font-family: script'><i>Fancy Web Title</i></h2>
+<button style='height:48px; margin-left: 15px; margin-right: 15px; width: 128px; background: lightblue' id='hereBtn' onclick='javascript:buttonClicked(event)'>Click Me!</button>
 </div>
 </html>
 ";

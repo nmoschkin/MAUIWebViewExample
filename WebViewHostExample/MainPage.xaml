@@ -29,8 +29,10 @@
 
             <controls:HybridWebView
                 x:Name="MyWebView"
+                HeightRequest="128"
                 HorizontalOptions="Fill"
                 VerticalOptions="FillAndExpand"
+                WidthRequest="512"
                 />
 
             <Label

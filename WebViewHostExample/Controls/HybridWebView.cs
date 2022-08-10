@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Maui.Handlers;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,14 +32,25 @@ namespace WebViewHostExample.Controls
         }
     }
 
-    public class HybridWebView : ContentView
+    public interface IHybridWebView : IView
     {
+        event EventHandler<SourceChangedEventArgs> SourceChanged;
+        event EventHandler<JavaScriptActionEventArgs> JavaScriptAction;
+        void Refresh();
 
-        public delegate void SourceChangedEvent(object sender, SourceChangedEventArgs e);
-        public event SourceChangedEvent SourceChanged;
+        WebViewSource Source { get; set; }
 
-        public delegate void JavaScriptActionEvent(object sender, JavaScriptActionEventArgs e);
-        public event JavaScriptActionEvent JavaScriptAction;
+        void Cleanup();
+
+        void InvokeAction(string data);
+
+    }
+        
+
+    public class HybridWebView : View, IHybridWebView
+    {
+        public event EventHandler<SourceChangedEventArgs> SourceChanged;
+        public event EventHandler<JavaScriptActionEventArgs> JavaScriptAction;
 
         public HybridWebView()
         {
