@@ -99,7 +99,7 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
     {
         readonly WeakReference<HybridWebViewHandler> hybridWebViewRenderer;
 
-        public JSBridge(HybridWebViewHandler hybridRenderer)
+        internal JSBridge(HybridWebViewHandler hybridRenderer)
         {
             hybridWebViewRenderer = new WeakReference<HybridWebViewHandler>(hybridRenderer);
         }
