@@ -13,6 +13,10 @@ using WebViewHostExample.Platforms.Droid.Renderers;
 using WebViewHostExample.Platforms.iOS.Renderers;
 #endif
 
+#if WINDOWS
+using WebViewHostExample.WinUI;
+#endif
+
 namespace WebViewHostExample;
 
 public static class MauiProgram
