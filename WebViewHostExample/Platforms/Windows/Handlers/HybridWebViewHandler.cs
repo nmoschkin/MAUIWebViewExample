@@ -67,12 +67,8 @@ public class HybridSocket
 
                 using (StreamReader reader = new StreamReader(body, encoding))
                 {
-                    if (req.ContentType != null)
-                    {
-                        Console.WriteLine("Client data content type {0}", req.ContentType);
-                    }
-
                     var json = reader.ReadToEnd();
+                
                     if (!string.IsNullOrEmpty(json))
                     {
                         SendToNative(json);
