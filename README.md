@@ -4,7 +4,7 @@ MAUI Custom Handlers For Hybrid Web View
 
 This is a sample MAUI project that implements a custom Hybrid WebView component with JavaScript -> Native interoperability for Android, iOS, and Windows.
 
-___Note:___ Both __Windows__ support and __EvaluateJavaScriptAsync__ support are in the windows-maui-support branch and will be merged, soon.
+___Note:___ _Both __Windows__ support and __EvaluateJavaScriptAsync__ support are in the __windows-maui-support__ branch and will be merged, soon._
 
 ## Regarding Windows 
 
