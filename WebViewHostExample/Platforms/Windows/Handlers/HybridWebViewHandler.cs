@@ -38,7 +38,7 @@ public class HybridSocket
         token = false;
     }
 
-    private void Fling(string json)
+    private void SendToNative(string json)
     {
         handler.VirtualView.InvokeAction(json);
     }
@@ -75,7 +75,7 @@ public class HybridSocket
                     var json = reader.ReadToEnd();
                     if (!string.IsNullOrEmpty(json))
                     {
-                        Fling(json);
+                        SendToNative(json);
                     }
                 }
 
