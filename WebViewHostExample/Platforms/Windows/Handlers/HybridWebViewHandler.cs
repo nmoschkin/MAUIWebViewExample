@@ -177,7 +177,7 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
         VirtualView.SourceChanged -= OnWebSourceChanged;
         VirtualView.Cleanup();
 
-        jsBridgeHandler = null;
+        //jsBridgeHandler = null;
     }
 
     private static void LoadSource(WebViewSource source, WebView2 control)
@@ -207,24 +207,24 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
     }
 }
 
-[ComVisible(true)]
-public class JSBridge
-{
-    readonly WeakReference<HybridWebViewHandler> hybridWebViewRenderer;
+//[ComVisible(true)]
+//public class JSBridge
+//{
+//    readonly WeakReference<HybridWebViewHandler> hybridWebViewRenderer;
 
-    internal JSBridge(HybridWebViewHandler hybridRenderer)
-    {
-        hybridWebViewRenderer = new WeakReference<HybridWebViewHandler>(hybridRenderer);
-    }
+//    internal JSBridge(HybridWebViewHandler hybridRenderer)
+//    {
+//        hybridWebViewRenderer = new WeakReference<HybridWebViewHandler>(hybridRenderer);
+//    }
 
-    public void InvokeAction(string data)
-    {
-        HybridWebViewHandler hybridRenderer;
+//    public void InvokeAction(string data)
+//    {
+//        HybridWebViewHandler hybridRenderer;
 
-        if (hybridWebViewRenderer != null && hybridWebViewRenderer.TryGetTarget(out hybridRenderer))
-        {
-            hybridRenderer.VirtualView.InvokeAction(data);
-        }
-    }
-}
+//        if (hybridWebViewRenderer != null && hybridWebViewRenderer.TryGetTarget(out hybridRenderer))
+//        {
+//            hybridRenderer.VirtualView.InvokeAction(data);
+//        }
+//    }
+//}
 
