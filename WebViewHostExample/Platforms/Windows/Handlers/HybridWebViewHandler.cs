@@ -53,28 +53,26 @@ public class HybridSocket
             
             while (token)
             {                
-                HttpListenerContext ctx = listener.GetContext();
-                
+                HttpListenerContext ctx = listener.GetContext();                
                 using HttpListenerResponse resp = ctx.Response;
 
-                resp.AddHeader("Access-Control-Allow-Origin", "null");
-                resp.AddHeader("Access-Control-Allow-Headers", "content-type");
-                
-                var req = ctx.Request;
+                    resp.AddHeader("Access-Control-Allow-Origin", "null");
+                    resp.AddHeader("Access-Control-Allow-Headers", "content-type");
 
-                Stream body = req.InputStream;
-                Encoding encoding = req.ContentEncoding;
+                    var req = ctx.Request;
 
-                using (StreamReader reader = new StreamReader(body, encoding))
-                {
-                    var json = reader.ReadToEnd();
-                
-                    if (!string.IsNullOrEmpty(json))
+                    Stream body = req.InputStream;
+                    Encoding encoding = req.ContentEncoding;
+
+                    using (StreamReader reader = new StreamReader(body, encoding))
                     {
-                        SendToNative(json);
-                    }
-                }
+                        var json = reader.ReadToEnd();
 
+                        if (ctx.Request.HttpMethod == "POST")
+                        {
+                            SendToNative(json);
+                        }
+                    }
 
                 resp.StatusCode = (int)HttpStatusCode.OK;
                 resp.StatusDescription = "Status OK";
