@@ -56,6 +56,7 @@ public class HybridSocket
                 HttpListenerContext ctx = listener.GetContext();
                 
                 using HttpListenerResponse resp = ctx.Response;
+
                 resp.AddHeader("Access-Control-Allow-Origin", "null");
                 resp.AppendHeader("Access-Control-Allow-Headers", "content-type");
                 
@@ -63,6 +64,7 @@ public class HybridSocket
 
                 Stream body = req.InputStream;
                 Encoding encoding = req.ContentEncoding;
+
                 using (StreamReader reader = new StreamReader(body, encoding))
                 {
                     if (req.ContentType != null)
@@ -70,9 +72,6 @@ public class HybridSocket
                         Console.WriteLine("Client data content type {0}", req.ContentType);
                     }
 
-                    Console.WriteLine("Client data content length {0}", req.ContentLength64);
-                    Console.WriteLine("Start of client data:");
-                    // Convert the data to a string and display it on the console.
                     var json = reader.ReadToEnd();
                     if (!string.IsNullOrEmpty(json))
                     {
@@ -142,7 +141,8 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
             {
                 var core = webView.CoreWebView2;
                 
-                
+                // In the future this should be simple and possible.
+
                 //jsBridgeHandler = new JSBridge(this);
                 //core.AddHostObjectToScript("jsBridge", jsBridgeHandler);
                 
