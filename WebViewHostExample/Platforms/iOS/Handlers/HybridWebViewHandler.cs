@@ -55,6 +55,7 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
             }
 
             VirtualView.SourceChanged += VirtualView_SourceChanged;
+            
         }
 
         protected override void DisconnectHandler(WKWebView platformView)

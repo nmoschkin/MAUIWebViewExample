@@ -49,6 +49,12 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
             }
 
             VirtualView.SourceChanged += VirtualView_SourceChanged;
+            VirtualView.RequestEvaluateJavaScript += VirtualView_RequestEvaluateJavaScript;
+        }
+
+        private void VirtualView_RequestEvaluateJavaScript(object sender, EvaluateJavaScriptAsyncRequest e)
+        {
+            PlatformView.EvaluateJavascript(e.Script, null);
         }
 
         protected override void DisconnectHandler(Android.Webkit.WebView platformView)

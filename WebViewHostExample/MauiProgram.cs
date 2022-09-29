@@ -1,10 +1,6 @@
 ﻿
 using WebViewHostExample.Controls;
 
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-
 #if ANDROID
 using WebViewHostExample.Platforms.Droid.Renderers;
 #endif
@@ -37,7 +33,7 @@ public static class MauiProgram
             {
                 handlers.AddHandler(typeof(HybridWebView), typeof(HybridWebViewHandler));
             });
-            ;
+        ;
 
 
         return builder.Build();

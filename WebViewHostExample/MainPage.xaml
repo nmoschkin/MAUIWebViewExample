@@ -29,7 +29,7 @@
 
             <controls:HybridWebView
                 x:Name="MyWebView"
-                HeightRequest="128"
+                HeightRequest="140"
                 HorizontalOptions="Fill"
                 Source="{Binding Source}"
                 VerticalOptions="FillAndExpand"
