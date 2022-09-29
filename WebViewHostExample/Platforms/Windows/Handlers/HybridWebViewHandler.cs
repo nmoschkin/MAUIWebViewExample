@@ -173,7 +173,7 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
 
     private void VirtualView_RequestEvaluateJavaScript(object sender, EvaluateJavaScriptAsyncRequest e)
     {
-        PlatformView.EvaluateJavaScript(e);
+        sync.Post((o) => PlatformView.EvaluateJavaScript(e), null);
     }
 
     protected override void DisconnectHandler(WebView2 platformView)

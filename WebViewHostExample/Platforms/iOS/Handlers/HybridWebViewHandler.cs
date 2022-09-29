@@ -61,7 +61,6 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
         private void VirtualView_RequestEvaluateJavaScript(object sender, EvaluateJavaScriptAsyncRequest e)
         {
             var script = new WKUserScript(new NSString(e.Script), WKUserScriptInjectionTime.AtDocumentEnd, false);
-
             userController.AddUserScript(script);
         }
 
