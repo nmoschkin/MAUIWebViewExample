@@ -129,19 +129,19 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
 
         webView.NavigationCompleted += WebView_NavigationCompleted;
 
-        webView.EnsureCoreWebView2Async().AsTask().ContinueWith((t) =>
-        {
-            sync.Post((o) =>
-            {
-                var core = webView.CoreWebView2;
-                
-                // In the future this should be simple and possible.
+        // In the future this should be simple and possible.
 
-                //jsBridgeHandler = new JSBridge(this);
-                //core.AddHostObjectToScript("jsBridge", jsBridgeHandler);
-                
-            }, null);
-        });
+        //webView.EnsureCoreWebView2Async().AsTask().ContinueWith((t) =>
+        //{
+        //    sync.Post((o) =>
+        //    {
+        //        var core = webView.CoreWebView2;
+
+        //        jsBridgeHandler = new JSBridge(this);
+        //        core.AddHostObjectToScript("jsBridge", jsBridgeHandler);
+
+        //    }, null);
+        //});
 
         return webView;
     }
