@@ -58,7 +58,7 @@ public class HybridSocket
                 using HttpListenerResponse resp = ctx.Response;
 
                 resp.AddHeader("Access-Control-Allow-Origin", "null");
-                resp.AppendHeader("Access-Control-Allow-Headers", "content-type");
+                resp.AddHeader("Access-Control-Allow-Headers", "content-type");
                 
                 var req = ctx.Request;
 
