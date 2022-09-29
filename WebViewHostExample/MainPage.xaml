@@ -3,38 +3,33 @@
     x:Class="WebViewHostExample.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:WebViewHostExample.Controls"
-    >
+    xmlns:controls="clr-namespace:WebViewHostExample.Controls">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25"
-            VerticalOptions="Center"
-            >
+            VerticalOptions="Center">
 
             <Image
                 HeightRequest="200"
                 HorizontalOptions="Center"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                Source="dotnet_bot.png"
-                />
+                Source="dotnet_bot.png" />
 
             <Label
                 FontSize="32"
                 HorizontalOptions="Center"
                 SemanticProperties.HeadingLevel="Level1"
-                Text="Hybrid WebView Test"
-                />
+                Text="Hybrid WebView Test" />
 
             <controls:HybridWebView
                 x:Name="MyWebView"
-                HeightRequest="128"
+                HeightRequest="140"
                 HorizontalOptions="Fill"
                 Source="{Binding Source}"
                 VerticalOptions="FillAndExpand"
-                WidthRequest="512"
-                />
+                WidthRequest="512" />
 
             <Label
                 x:Name="ChangeLabel"
@@ -42,8 +37,28 @@
                 HorizontalOptions="Center"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 SemanticProperties.HeadingLevel="Level2"
-                Text="This Native Text Will Change When The Web Button Is Clicked"
-                />
+                Text="This Native Text Will Change When The Web Button Is Clicked" />
+
+            <Label
+                FontSize="14"
+                HorizontalOptions="Center"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                SemanticProperties.HeadingLevel="Level2"
+                Text="Enter some text, then click the native button, below, to trigger Javascript in the webview." />
+
+            <Entry
+                x:Name="ChangeText"
+                FontSize="14"
+                HorizontalOptions="Center"
+                Text="Native To Javascript!" />
+
+            <Button
+                x:Name="EvalButton"
+                Margin="16,8"
+                Clicked="EvalButton_Clicked"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="Send To WebView" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -36,7 +36,11 @@ namespace WebViewHostExample.Controls
     {
         event EventHandler<SourceChangedEventArgs> SourceChanged;
         event EventHandler<JavaScriptActionEventArgs> JavaScriptAction;
+        event EventHandler<EvaluateJavaScriptAsyncRequest> RequestEvaluateJavaScript;
+
         void Refresh();
+
+        Task EvaluateJavaScriptAsync(EvaluateJavaScriptAsyncRequest request);
 
         WebViewSource Source { get; set; }
 
@@ -51,10 +55,19 @@ namespace WebViewHostExample.Controls
     {
         public event EventHandler<SourceChangedEventArgs> SourceChanged;
         public event EventHandler<JavaScriptActionEventArgs> JavaScriptAction;
+        public event EventHandler<EvaluateJavaScriptAsyncRequest> RequestEvaluateJavaScript;
 
         public HybridWebView()
         {
 
+        }
+
+        public async Task EvaluateJavaScriptAsync(EvaluateJavaScriptAsyncRequest request)
+        {
+            await Task.Run(() =>
+            {
+                RequestEvaluateJavaScript?.Invoke(this, request);
+            });
         }
 
         public void Refresh()
