@@ -188,30 +188,22 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
             {
                 control.EnsureCoreWebView2Async().AsTask().ContinueWith((t) =>
                 {
-                   
-                    sync.Post((o) =>
-                    {
-                        if (source is HtmlWebViewSource html)
-                        {
-                            control.CoreWebView2.NavigateToString(html.Html);
-                        }
-                        else if (source is UrlWebViewSource url)
-                        {
-                            control.CoreWebView2.Navigate(url.Url);
-                        }
-                    }, null);
+                    LoadSource(source, control);
                 });
             }
             else
             {
-                if (source is HtmlWebViewSource html)
+                sync.Post((o) =>
                 {
-                    control.CoreWebView2.NavigateToString(html.Html);
-                }
-                else if (source is UrlWebViewSource url)
-                {
-                    control.CoreWebView2.Navigate(url.Url);
-                }
+                    if (source is HtmlWebViewSource html)
+                    {
+                        control.CoreWebView2.NavigateToString(html.Html);
+                    }
+                    else if (source is UrlWebViewSource url)
+                    {
+                        control.CoreWebView2.Navigate(url.Url);
+                    }
+                }, null);
             }
         }
         catch { }
