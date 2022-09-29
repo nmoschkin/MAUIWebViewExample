@@ -15,7 +15,7 @@ using System.Text;
 
 namespace WebViewHostExample.WinUI;
 
-public class HybridSocket
+internal class HybridSocket
 {
     private HttpListener listener;
     private HybridWebViewHandler handler;
@@ -100,21 +100,21 @@ public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
                     http.send(JSON.stringify(data));
                 }";
 
-    private JSBridge jsBridgeHandler;
+    //private JSBridge jsBridgeHandler;
     static SynchronizationContext sync;
-    private HybridSocket socketer;
+    private HybridSocket jssocket;
 
     public HybridWebViewHandler() : base(HybridWebViewMapper)
     {
         sync = SynchronizationContext.Current;
-        socketer = new HybridSocket(this);
+        jssocket = new HybridSocket(this);
 
-        Task.Run(() => socketer.Listen());
+        Task.Run(() => jssocket.Listen());
     }
 
     ~HybridWebViewHandler()
     {
-        socketer.StopListening();
+        jssocket.StopListening();
     }
 
     private void OnWebSourceChanged(object sender, SourceChangedEventArgs e)
