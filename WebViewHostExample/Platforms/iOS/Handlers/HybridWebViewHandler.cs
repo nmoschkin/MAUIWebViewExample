@@ -55,8 +55,16 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
             }
 
             VirtualView.SourceChanged += VirtualView_SourceChanged;
-            
+            VirtualView.RequestEvaluateJavaScript += VirtualView_RequestEvaluateJavaScript;
         }
+
+        private void VirtualView_RequestEvaluateJavaScript(object sender, EvaluateJavaScriptAsyncRequest e)
+        {
+            var script = new WKUserScript(new NSString(e.Script), WKUserScriptInjectionTime.AtDocumentEnd, false);
+
+            userController.AddUserScript(script);
+        }
+
 
         protected override void DisconnectHandler(WKWebView platformView)
         {
