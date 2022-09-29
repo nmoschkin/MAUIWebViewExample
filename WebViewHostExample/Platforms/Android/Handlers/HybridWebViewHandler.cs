@@ -16,9 +16,11 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
         const string JavascriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";
 
         private JSBridge jsBridgeHandler;
+        static SynchronizationContext sync;
 
         public HybridWebViewHandler() : base(HybridWebViewMapper)
         {
+            sync = SynchronizationContext.Current;
         }
 
         private void VirtualView_SourceChanged(object sender, SourceChangedEventArgs e)
@@ -28,6 +30,8 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
 
         protected override Android.Webkit.WebView CreatePlatformView()
         {
+            sync = sync ?? SynchronizationContext.Current;
+
             var webView = new Android.Webkit.WebView(Context);
             jsBridgeHandler = new JSBridge(this);
 
@@ -54,7 +58,7 @@ namespace WebViewHostExample.Platforms.Droid.Renderers
 
         private void VirtualView_RequestEvaluateJavaScript(object sender, EvaluateJavaScriptAsyncRequest e)
         {
-            PlatformView.EvaluateJavascript(e.Script, null);
+            sync.Post((o) => PlatformView.EvaluateJavascript(e.Script, null), null);
         }
 
         protected override void DisconnectHandler(Android.Webkit.WebView platformView)

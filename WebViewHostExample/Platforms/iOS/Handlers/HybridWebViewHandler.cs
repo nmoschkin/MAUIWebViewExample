@@ -18,9 +18,12 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
 
         private WKUserContentController userController;
         private JSBridge jsBridgeHandler;
+        static SynchronizationContext sync;
+
 
         public HybridWebViewHandler() : base(HybridWebViewMapper)
         {
+            sync = SynchronizationContext.Current;
         }
 
         private void VirtualView_SourceChanged(object sender, SourceChangedEventArgs e)
@@ -30,7 +33,7 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
 
         protected override WKWebView CreatePlatformView()
         {
-
+            sync = sync ?? SynchronizationContext.Current;
             jsBridgeHandler = new JSBridge(this);
             userController = new WKUserContentController();
 
@@ -60,8 +63,11 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
 
         private void VirtualView_RequestEvaluateJavaScript(object sender, EvaluateJavaScriptAsyncRequest e)
         {
-            var script = new WKUserScript(new NSString(e.Script), WKUserScriptInjectionTime.AtDocumentEnd, false);
-            userController.AddUserScript(script);
+            sync.Post((o) =>
+            {
+                var script = new WKUserScript(new NSString(e.Script), WKUserScriptInjectionTime.AtDocumentEnd, false);
+                userController.AddUserScript(script);
+            }, null);
         }
 
 
