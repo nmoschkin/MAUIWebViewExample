@@ -12,6 +12,6 @@ But, then I remembered it was Windows, so I created a work-around that most cert
 
 ## EvaluateJavaScriptAsync
 
-Because people kept asking for it, I have implemented this in all three platforms, as well.
+Because people kept asking for it, I went ahead and implemented this in all three platforms, as well.
 
 
