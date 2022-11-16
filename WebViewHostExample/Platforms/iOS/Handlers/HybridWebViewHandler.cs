@@ -3,6 +3,7 @@
 using Foundation;
 
 using Microsoft.Maui.Handlers;
+using Microsoft.Maui.Platform;
 
 using WebKit;
 
@@ -65,11 +66,9 @@ namespace WebViewHostExample.Platforms.iOS.Renderers
         {
             sync.Post((o) =>
             {
-                var script = new WKUserScript(new NSString(e.Script), WKUserScriptInjectionTime.AtDocumentEnd, false);
-                userController.AddUserScript(script);
+                PlatformView.EvaluateJavaScript(e);
             }, null);
         }
-
 
         protected override void DisconnectHandler(WKWebView platformView)
         {
