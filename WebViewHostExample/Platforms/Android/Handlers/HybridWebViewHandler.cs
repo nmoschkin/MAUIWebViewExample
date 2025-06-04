@@ -9,9 +9,9 @@ using WebViewHostExample.Controls;
 
 namespace WebViewHostExample.Platforms.Droid.Renderers
 {
-    public class HybridWebViewHandler : ViewHandler<IHybridWebView, Android.Webkit.WebView>
+    public class HybridWebViewHandler : ViewHandler<WebViewHostExample.Controls.IHybridWebView, Android.Webkit.WebView>
     {
-        public static PropertyMapper<IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
+        public static PropertyMapper<WebViewHostExample.Controls.IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<WebViewHostExample.Controls.IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
 
         const string JavascriptFunction = "function invokeCSharpAction(data){jsBridge.invokeAction(data);}";
 

@@ -11,9 +11,9 @@ using WebViewHostExample.Controls;
 
 namespace WebViewHostExample.Platforms.iOS.Renderers
 {
-    public class HybridWebViewHandler : ViewHandler<IHybridWebView, WKWebView>
+    public class HybridWebViewHandler : ViewHandler<WebViewHostExample.Controls.IHybridWebView, WKWebView>
     {
-        public static PropertyMapper<IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
+        public static PropertyMapper<WebViewHostExample.Controls.IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<WebViewHostExample.Controls.IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
 
         const string JavaScriptFunction = "function invokeCSharpAction(data){window.webkit.messageHandlers.invokeAction.postMessage(data);}";
 

@@ -31,7 +31,7 @@ public static class MauiProgram
             })
             .ConfigureMauiHandlers(handlers =>
             {
-                handlers.AddHandler(typeof(HybridWebView), typeof(HybridWebViewHandler));
+                handlers.AddHandler(typeof(WebViewHostExample.Controls.HybridWebView), typeof(HybridWebViewHandler));
             });
         ;
 

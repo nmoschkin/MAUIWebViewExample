@@ -87,9 +87,9 @@ internal class HybridSocket
     }
 }
 
-public class HybridWebViewHandler : ViewHandler<IHybridWebView, WebView2>
+public class HybridWebViewHandler : ViewHandler<WebViewHostExample.Controls.IHybridWebView, WebView2>
 {
-    public static PropertyMapper<IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
+    public static PropertyMapper<WebViewHostExample.Controls.IHybridWebView, HybridWebViewHandler> HybridWebViewMapper = new PropertyMapper<WebViewHostExample.Controls.IHybridWebView, HybridWebViewHandler>(ViewHandler.ViewMapper);
 
     const string JavascriptFunction = @"function invokeCSharpAction(data)
                 {
