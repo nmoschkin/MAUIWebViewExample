@@ -4,6 +4,8 @@ MAUI Custom Handlers For Hybrid Web View
 
 This is a sample MAUI project that implements a custom Hybrid WebView component with JavaScript -> Native interoperability for Android, iOS, and Windows.
 
+___This is an extremely minimal project!___ Any additional enhancements you would like, for example, a more complete restoration of the original WebView's functionality is totally up to you.
+
 ## Regarding Windows 
 
 According to various articles I read, the current WinUI3 iteration of WebView2 for MAUI is not yet allowing us to invoke _AddHostObjectToScript_. They plan this for a future release.
